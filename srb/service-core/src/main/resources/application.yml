@@ -1,0 +1,57 @@
+server:
+  port: 8110
+spring:
+  profiles:
+    active: dev
+  application:
+    name: service-core
+  datasource:
+    druid:
+      username: leellun
+      password: liulun666
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://localhost:3308/srb?autoReconnect=true&userUnicode=true&characterEncoding=UTF8&serverTimezone=GMT%2B8&useSSL=false&serverTimezone=Asia/Shanghai&rewriteBatchedStatements=true&allowMultiQueries=true&allowPublicKeyRetrieval=true
+      type: com.alibaba.druid.pool.DruidDataSource
+      #   ???????
+      initialSize: 10
+      minIdle: 10
+      maxActive: 50
+      maxWait: 60000
+      timeBetweenEvictionRunsMillis: 60000
+      minEvictableIdleTimeMillis: 300000
+      validationQuery: SELECT 1 FROM DUAL
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      poolPreparedStatements: true
+      maxPoolPreparedStatementPerConnectionSize: 20
+      useGlobalDataSourceStat: true
+      connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+
+  redis:
+    host: localhost
+    port: 6379
+    database: 0
+    timeout: 3000ms #???????????????????????
+    lettuce:
+      pool:
+        max-active: 20  #?????????????????8
+        max-wait: -1    #???????????????????-1
+        max-idle: 8     #?????????8
+        min-idle: 0     #?????????0
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848 # nacos????
+  #spring:
+  rabbitmq:
+    host: 192.168.66.11
+    port: 5672
+    virtual-host: /
+    username: leellun
+    password: 123456
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mapper-locations: classpath:xml/*.xml
